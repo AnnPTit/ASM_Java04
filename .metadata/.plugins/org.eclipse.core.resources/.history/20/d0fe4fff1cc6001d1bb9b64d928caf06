@@ -1,0 +1,13 @@
+package repository;
+
+import entity.History;
+import entity.User;
+import entity.Video;
+
+public class HistoryRepository {
+
+	
+	public History getHistoryByUserIdAndVideoId(User user,Video video) {
+		
+	}
+}

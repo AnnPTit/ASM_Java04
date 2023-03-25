@@ -1,0 +1,23 @@
+package repository;
+
+import javax.persistence.Query;
+
+import org.hibernate.Session;
+
+import entity.History;
+import entity.User;
+import entity.Video;
+import util.HibernateUtil;
+
+public class HistoryRepository {
+
+	public History getHistoryByUserIdAndVideoId(User user, Video video) {
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			Query query = session.createQuery("FROM User");
+			list = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return list;
+	}
+}

@@ -1,0 +1,45 @@
+package repository;
+
+import java.util.Date;
+
+import javax.persistence.Query;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import entity.History;
+import entity.User;
+import entity.Video;
+import util.HibernateUtil;
+
+public class HistoryRepository {
+
+	public History getHistoryByUserIdAndVideoId(int user, int video) {
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			Query query = session.createQuery("FROM History where userId=:userid and videoId=:videoid");
+			query.setParameter("userid", user);
+			query.setParameter("videoid", video);
+			History history = (History) query.getSingleResult();
+			return history;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return null;
+	}
+	public History updateViewDate(int userId ,int videoId , Date date) {
+		Transaction transaction = null;
+		try (Session session = HibernateUtil.getFACTORY().openSession()) {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("Update History set viewDate=date where userId=:userId and videoId = videoId");
+			query.setParameter("view", view + 1);
+			query.setParameter("id", videoID);
+			query.executeUpdate();
+			transaction.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return false;
+	}
+	}
+}
